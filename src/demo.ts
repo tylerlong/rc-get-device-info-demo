@@ -1,4 +1,4 @@
-import RingCentral from '@rc-ex/core';
+import RingCentral from "@rc-ex/core";
 
 const rc = new RingCentral({
   server: process.env.RINGCENTRAL_SERVER_URL,
