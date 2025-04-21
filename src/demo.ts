@@ -13,13 +13,17 @@ const main = async () => {
 
   // list all extension devices
   const r0 = await rc.restapi().account().extension().device().get();
-  console.log(JSON.stringify(r0, null, 2));
+  const devices = r0.records!.filter((d) => d.type === "OtherPhone");
+  if (devices.length === 0) {
+    console.log("No suitable devices found");
+    return;
+  }
 
   // fetch the credentials of a device
   const r = await rc
     .restapi()
     .account()
-    .device(process.env.RINGCENTRAL_DEVICE_ID)
+    .device(devices[0].id!)
     .sipInfo()
     .get();
   console.log(JSON.stringify(r, null, 2));
